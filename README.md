@@ -1,6 +1,5 @@
 ## Placing orders to IB TWS via Tradingview alerts webhooks
 
----
 
 Connect TradingView with Interactive Brokers to process automated signals
 as entries and exits in an IB brokerage account.
