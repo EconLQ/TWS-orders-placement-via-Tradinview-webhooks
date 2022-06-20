@@ -1,0 +1,4 @@
+# Core
+Flask==2.1.2
+ib_insync==0.9.70
+sanic==22.3.2
