@@ -36,8 +36,8 @@ async def check_if_reconnect():
                 "%b %d %H:%M:%S")) + " Reconnect Success")
         except Exception as e:
             exc_type, exc_obj, exc_tb = sys.exc_info()
-            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-            print(exc_type, fname, exc_tb.tb_lineno)
+            file_name = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+            print(exc_type, file_name, exc_tb.tb_lineno)
             print("Make sure TWS or Gateway is open with the correct port")
             print((datetime.now().strftime(
                 "%b %d %H:%M:%S")) + " : " + str(e))
@@ -55,8 +55,8 @@ async def webhook(request):
         ticker = str(data['symbol'])
         # Buying stock
         order = MarketOrder("BUY", 1, account=app_ib.wrapper.accounts[0])
-        contract = Stock('SPY', 'SMART', 'USD')
-        # contract = Stock(ticker, 'SMART', 'USD')
+        contract = Stock(ticker, 'SMART', 'USD')
+        # contract = contract_type_check(ticker=ticker)
         print((datetime.now().strftime(
             "%b %d %H:%M:%S")) + " Buying: " + ticker)
         # Placing order
