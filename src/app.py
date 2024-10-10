@@ -1,3 +1,5 @@
+#!/usr/bin/env python3 
+
 """
 Routes and views for the flask application.
 """
@@ -11,7 +13,10 @@ from sanic import response
 
 # Create Sanicobject called app.
 app = Sanic(__name__)
-
+# IB constants
+HOST: str = "127.0.0.1"
+DEMO_PORT: int = 7497
+LIVE_PORT: int = 7496
 
 # Create root to easily let us know its on/working.
 @app.route('/')
@@ -30,7 +35,7 @@ async def check_if_reconnect():
                 "%b %d %H:%M:%S")) + " Reconnecting")
             app_ib.disconnect()
             app_ib_reconnect = IB()
-            app_ib_reconnect.connect('127.0.0.1', 7496, clientId=1)
+            app_ib_reconnect.connect(HOST, DEMO_PORT, clientId=1)
             app_ib_reconnect.errorEvent += check_on_ib_error
             print((datetime.now().strftime(
                 "%b %d %H:%M:%S")) + " Reconnect Success")
@@ -73,12 +78,11 @@ def check_on_ib_error(self, reqId, error_code, error_string, contract):
 
 
 if __name__ == '__main__':
-    # IB Connection
     # Connect to IB on init
     app_ib = IB()
     print((datetime.now().strftime(
         "%b %d %H:%M:%S")) + " Connecting to IB")
-    app_ib.connect('127.0.0.1', 7496, clientId=1)
+    app_ib.connect(HOST, DEMO_PORT, clientId=1)
     print((datetime.now().strftime(
         "%b %d %H:%M:%S")) + " Successfully Connected to IB")
     app_ib.errorEvent += check_on_ib_error
